@@ -1,0 +1,68 @@
+1. Register User
+	API - /api/users/userRegister
+	Method - POST
+	Request Header - 
+		{
+			"firstName":"abc",
+            "lastName":"xyz",
+            "phoneNo":"9087654321",
+            "email":"abc@gmail.com",
+            "address":"abcde"
+		}
+
+	Response - 
+		{
+			"message": "User Registered Successfully"
+		}
+2.Get Register User 
+    API - /api/users/userRegister
+    Method - GET
+    Response - 
+        [
+            {
+                "_id": "5c909509b5a526229e945888",
+                "firstName": "Varun",
+                "lastName": "Suresh",
+                "phoneNo": 9008834346,
+                "email": "varunsuresh.h@gmail.com",
+                "address": "Hirikyathanahalli,Hunsur,Mysuru",
+                "__v": 0
+            },
+            {
+                "_id": "5c9099eaac6c7e285aa386a7",
+                "firstName": "Harsha",
+                "lastName": "H S",
+                "phoneNo": 9008834346,
+                "email": "harsha@gmail.com",
+                "address": "Hirikyathanahalli,Hunsur,Mysuru",
+                "__v": 0
+            }
+        ]
+
+3.Delete Registered User
+    API - /api/users/userRegister/id
+    Method - DELETE
+    Response - { "User Deleted Successfully" }
+
+4.Update Registered User
+    API - /api/users/userRegister/id
+    Method - PUT
+    Request Header - 
+        {
+            "_id":"123",
+            "firstName":"abcde",
+            "lastName":"xy",
+            "phoneNo":"9087654321",
+            "email":"abc@gmail.com",
+            "address":"abcde"
+        }
+    
+    Response - 
+         {
+            "_id":"123",
+            "firstName":"abcde",
+            "lastName":"xy",
+            "phoneNo":"9087654321",
+            "email":"abc@gmail.com",
+            "address":"abcde"
+        }
