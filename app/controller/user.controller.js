@@ -1,4 +1,4 @@
-const UserRegister = require("../models/login.model.js");
+const UserRegister = require("../models/register'.model");
 const { ObjectID } = require("mongodb");
 
 exports.userRegister = (req, res) => {
