@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
+const bcrypt = require("bcryptjs");
 
 const UserRegisterSchema = new mongoose.Schema({
   firstName: {
@@ -51,12 +52,12 @@ const UserRegisterSchema = new mongoose.Schema({
   ]
 });
 
-UserRegisterSchema.methods.toJSON = function() {
-  var user = this;
-  var userObject = user.toObject();
+// UserRegisterSchema.methods.toJSON = function() {
+//   var user = this;
+//   var userObject = user.toObject();
 
-  return _.pick(userObject, ["_id", "email"]);
-};
+//   return _.pick(userObject, ["_id", "email"]);
+// };
 
 UserRegisterSchema.methods.generateAuthToken = function() {
   var user = this;
@@ -74,5 +75,20 @@ UserRegisterSchema.methods.generateAuthToken = function() {
     return token;
   });
 };
+
+UserRegisterSchema.pre("save", function(next) {
+  var user = this;
+
+  if (user.isModified("password")) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
 
 module.exports = mongoose.model("UserRegister", UserRegisterSchema);

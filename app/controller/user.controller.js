@@ -3,24 +3,16 @@ const { ObjectID } = require("mongodb");
 
 exports.userRegister = (req, res) => {
   if (
-    !req.body.firstName &&
-    !req.body.lastName &&
-    !req.body.phoneNo &&
-    !req.body.email &&
+    !req.body.firstName ||
+    !req.body.lastName ||
+    !req.body.phoneNo ||
+    !req.body.email ||
     !req.body.address
   ) {
     return res.send({
       message: "All fields are requires"
     });
-  }
-
-  if (
-    req.body.firstName &&
-    req.body.lastName &&
-    req.body.phoneNo &&
-    req.body.email &&
-    req.body.address
-  ) {
+  } else {
     const usersDetails = new UserRegister({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -32,7 +24,7 @@ exports.userRegister = (req, res) => {
     usersDetails
       .save()
       .then(() => {
-        usersDetails.generateAuthToken();
+        return usersDetails.generateAuthToken();
         // res.send(data);
       })
       .then(token => {
