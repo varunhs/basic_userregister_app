@@ -66,3 +66,25 @@
             "email":"abc@gmail.com",
             "address":"abcde"
         }
+
+5.Login Registered User
+    API - /api/userLogin/Login
+    Method - POST
+    Request Header - 
+        {
+            "email":"harsha.h@gmail.com",
+            "password":"harsha"
+        }
+    
+    Response - 
+        {
+            "_id": "5c9906b0a79d8d1f93cc177c",
+            "email": "varunsuresh.h@gmail.com",
+            "tokens": [
+                {
+                    "_id": "5c9906b1a79d8d1f93cc177d",
+                    "access": "auth",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yzk5MDZiMGE3OWQ4ZDFmOTNjYzE3N2MiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTUzNTMyNTkzfQ.SaK2OR2LtNkN1ZgphphpqNuyvd0lTe0kLHeROQEnSes"
+                }
+            ]
+        }
