@@ -73,6 +73,7 @@ exports.removeRegisteredUser = (req, res) => {
 };
 
 exports.updateRegisteredUser = (req, res) => {
+  console.log("USER DATA", req);
   const usersDetails = new UserRegister({
     _id: req.params.id,
     firstName: req.body.firstName,

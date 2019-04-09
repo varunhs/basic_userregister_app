@@ -7,5 +7,6 @@ quotesRouter.route("/quoteAdd").post(quotes.addQuote);
 quotesRouter.route("/quoteDelete/:id").delete(quotes.deleteQuote);
 quotesRouter.route("/quoteList").get(quotes.getQuotes);
 quotesRouter.route("/quoteList/:id").get(quotes.getQuotesIndividual);
+quotesRouter.route("/quoteUpdate/:id").put(quotes.updateQuote);
 
 module.exports = quotesRouter;

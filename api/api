@@ -147,4 +147,15 @@
             {
                 "message": "Quote Deleted Successfully"
             }
+    6.5: Update Quote
+        API - /api/quotes/quoteUpdate/id
+        Method - PUT
+        Request - 
+            {
+                "quote": "This is the fourth updated api test quote of the day."
+            }
+        Response - 
+            {
+                Quote Updated Successfully
+            }
     

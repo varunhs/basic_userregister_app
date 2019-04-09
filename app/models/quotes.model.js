@@ -6,13 +6,12 @@ const QuoteDetailsSchema = new mongoose.Schema({
     required: true
   },
   createdAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    // default: Date.now,
     required: false
   },
   updatedAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
     required: false
   }
 });

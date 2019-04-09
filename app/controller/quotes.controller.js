@@ -1,9 +1,11 @@
 const quotesDetails = require("../models/quotes.model");
 const { ObjectID } = require("mongodb");
+const moment = require("moment");
 
 exports.addQuote = (req, res) => {
   const quoteAdd = new quotesDetails({
-    quote: req.body.quote
+    quote: req.body.quote,
+    createdAt: moment().format()
   });
   quoteAdd.save().then(data => {
     res
@@ -30,7 +32,7 @@ exports.deleteQuote = (req, res) => {
         return res.status(404).send();
       }
       res.send({
-        message: data.message || "Quote Deleted Successfully"
+        message: data || "Quote Deleted Successfully"
       });
     })
     .catch(err => {
@@ -64,5 +66,42 @@ exports.getQuotesIndividual = (req, res) => {
     })
     .catch(err => {
       res.status(404).send(err);
+    });
+};
+
+// exports.updateQuote = (res, req) => {
+//   console.log("REQUEST DATA", req.params.id);
+//   const quoteUpdateDetails = new quotesDetails({
+//     id: req.params.id,
+//     quote: req.body.quote,
+//     updatedAt: moment().format()
+//   });
+
+//   quoteUpdateDetails.updateOne(quoteUpdateDetails).then(data => {
+//     if (!data) {
+//       res.status(404).send();
+//     }
+//     res.send({
+//       message: data || "Quote Updated Successfullly"
+//     });
+//   });
+// };
+
+exports.updateQuote = (req, res) => {
+  console.log("USER DATA", req);
+  const quoteUpdateDetails = new quotesDetails({
+    _id: req.params.id,
+    quote: req.body.quote,
+    updatedAt: moment().format()
+  });
+  quoteUpdateDetails
+    .updateOne(quoteUpdateDetails)
+    .then(data => {
+      res.send({ message: "Quote Updated Successfully" });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occured while creating the Register"
+      });
     });
 };
