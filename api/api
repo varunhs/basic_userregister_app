@@ -88,3 +88,63 @@
                 }
             ]
         }
+
+6.Quote API'S
+    6.1: Add Quote
+        API - /api/quotes/quoteAdd
+        Method - POST
+        Request Header - 
+            {
+                "quote":"This is the fifth quote of the day."
+            }
+
+        Response - 
+            {
+                "message": "Quote Added Successfully"
+            }
+    6.2: Get Quote
+        API - /api/quotes/quoteList
+        Method - GET
+        Response - 
+            [
+                {
+                    "_id": "5cac8ba50a3f7a4690ecd570",
+                    "quote": "This is the third quote of the day.",
+                    "createdAt": "2019-04-09T12:10:13.666Z",
+                    "updatedAt": "2019-04-09T12:10:13.666Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5cac8eae159ae6492e134ef5",
+                    "quote": "This is the fourth quote of the day.",
+                    "createdAt": "2019-04-09T12:23:10.624Z",
+                    "updatedAt": "2019-04-09T12:23:10.624Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5cac8eb8159ae6492e134ef6",
+                    "quote": "This is the fifth quote of the day.",
+                    "createdAt": "2019-04-09T12:23:20.823Z",
+                    "updatedAt": "2019-04-09T12:23:20.823Z",
+                    "__v": 0
+                }
+            ]
+    6.3: Get Quote Individualy(By ID)
+        API - /api/quotes/quoteList/id
+        Method - Get
+        Response - 
+            {
+                 "_id": "5cac8eae159ae6492e134ef5",
+                "quote": "This is the fourth quote of the day.",
+                "createdAt": "2019-04-09T12:23:10.624Z",
+                "updatedAt": "2019-04-09T12:23:10.624Z",
+                "__v": 0
+            }    
+    6.4: Delete Quote
+        API - /api/quotes/quoteDelete/id
+        Method - Delete
+        Response - 
+            {
+                "message": "Quote Deleted Successfully"
+            }
+    

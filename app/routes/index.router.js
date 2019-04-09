@@ -1,6 +1,7 @@
 const express = require("express");
 const userRoutes = require("./userRegister.route");
 const loginRoutes = require("./login.routes");
+const quotesRoutes = require("./quotes.router");
 
 const indexRouter = express.Router();
 
@@ -8,6 +9,9 @@ const indexRouter = express.Router();
 indexRouter.use("/users", userRoutes);
 
 // Login Router
-indexRouter.use("/userLogin",loginRoutes);
+indexRouter.use("/userLogin", loginRoutes);
+
+// Quotes Router
+indexRouter.use("/quotes", quotesRoutes);
 
 module.exports = indexRouter;

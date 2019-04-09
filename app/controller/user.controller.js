@@ -60,7 +60,7 @@ exports.removeRegisteredUser = (req, res) => {
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
-  UserRegister.findOneAndRemove(id)
+  UserRegister.findByIdAndRemove(id)
     .then(data => {
       if (!data) {
         return res.status(404).send();
@@ -84,7 +84,6 @@ exports.updateRegisteredUser = (req, res) => {
   usersDetails
     .updateOne(usersDetails)
     .then(data => {
-      console.log("DATA", data);
       res.send(data);
     })
     .catch(err => {

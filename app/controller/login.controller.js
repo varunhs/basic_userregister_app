@@ -12,6 +12,6 @@ exports.userLogin = (req, res) => {
       res.send(user);
     })
     .catch(err => {
-      res.status(400).send();
+      res.status(400).send(err);
     });
 };

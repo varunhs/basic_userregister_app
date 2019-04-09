@@ -1,0 +1,495 @@
+{% comment %} updated on 02 FEB 2019 YASIN {% endcomment %}
+1. Signup User
+	API - /api/accounts/signup/
+	Method - POST
+	Request Header - 
+		{
+			"email":"yaseentahasildar@gmail.com",
+            "password":"yasin123456",
+            "first_name":"yasin",
+            "last_name":"taha",
+            "contact_number":"7026508347"
+		}
+
+	Response - 
+		{
+			Status : 201  Created 
+		}
+    ################################################
+
+    1.1 Signup Verification
+        API - /api/accounts/signup/verify/?code=<code>
+	    Method - GET
+        Response - 
+		{
+			"success": "User verified."
+		}
+
+
+2. User Login
+	API - /api/accounts/login/
+	Method - POST
+	Request Header - 
+		{
+			"email":"yaseentahasildar@gmail.com",
+	        "password":"yasin123456"
+		}
+
+	Response - 
+{
+    "token": "eabd3148c4d45555691dfccc18efcccccdf3c763",
+    "user_id": 3
+}
+
+3.User Logout
+    API - /api/accounts/logout
+	Method - POST
+	HTTP Header - 
+		{
+			Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+		}
+
+	Response - 
+		{
+            "success": "User logged out."
+		}  
+
+{% comment %} updated on 04 FEB 2019 YASIN {% endcomment %} 
+4 User Reset Password
+    API - /api/accounts/password/reset/
+    Method - POST
+    Request Header - 
+		{
+			"email":"yasintahsildar@gmail.com"
+		}
+
+	Response - 
+		{
+            Status: 201 Created
+		}
+    ################################################
+    4.1 Reset User Password Verification
+        API - /api/accounts/password/reset/verify/?code=<code>
+	    Method - GET
+        Response - 
+		{
+			"success": "User verified."
+		}
+
+    ################################################
+
+
+    2nd Screen
+
+    4.2 Reset User Password 
+        API - /api/accounts/password/reset/verified/
+	    Method - POST
+        Request - 
+		{
+			"code":"9e2b0a0237b7a7c6db91ecd54dadf3ee05729918"
+            "password":"abc123"
+		}
+        Response - 
+		{
+            "success": "Password reset."
+        }
+
+
+{% comment %}  {% endcomment %}
+5.User password Change
+    API - /api/accounts/password/change/
+    Method - POST
+    HTTP Header - 
+		{
+			Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+		}
+
+    Request Header - 
+		{
+			"password":"abc123"
+		}
+
+	Response - 
+		{
+            "success": "Password changed."
+		}
+
+{% comment %} quote API_DOC starts {% endcomment %}
+6.Quotes-API
+    API - /app/quotelistadd/
+    Method - POST
+    Request - 
+        
+            {
+                "quote": "third entry quote"
+            }
+        
+    Response - 
+        {
+           status: 201 Created
+        }
+    ######################################
+    API - /app/quotelist/
+    Method - GET
+    Response - 
+        [
+            {
+                "id": 3,
+                "quote": "third entry quote",
+                "timestamp": "2019-01-22T14:10:40.770248"
+            }
+        ]    
+    #####################################
+    API - /app/quotelistUD/3/
+    Method - PUT
+    Request - 
+             
+            {
+                "quote": "second entry quote edited "
+            }
+        
+    Response-
+        {
+            status : 200 OK
+        }    
+    ##################################
+    API - /app/quotelistUD/3/
+    Method- DELETE      
+    Response-
+        {
+            status: 204 No Content
+        }    
+{% comment %} quote API_DOC ends {% endcomment %}        
+
+{% comment %}latest Quote API_DOC  {% endcomment %}
+7. Latest-Quote
+    API - /app/latestQuote/
+    Method - GET
+    Response - 
+    {
+    "Quote": [
+        {
+            "quote": "This is a quote.",
+            "date": "2019-01-08T18:01:48.701767"
+        }
+    ]
+    }
+
+{% comment %}testimonial CRUD API_DOC strats {% endcomment %}
+8.Testimonial-API
+    API - /app/testimonialPost/
+    Method - POST
+    Request - 
+        
+            {
+                "testimonial": "latest testimonial",
+                "author": "author1",
+            }
+             
+    Response -
+        {
+
+            status:201 Created  
+
+        }
+
+    ######################################
+    API - /app/testimonialList/
+    Method - GET
+    Response - 
+        [
+            {
+                "id": 1,
+                "testimonial": "new testimonial entry edite",
+                "author": "author1",
+                "date": "2019-01-22T14:38:54.044357"
+            },
+            {
+                "id": 3,
+                "testimonial": "third edited  testimonial entry",
+                "author": "author1",
+                "date": "2019-01-22T14:46:47.519578"
+            }
+        ]    
+
+    #####################################
+    API - /app/testimonialUD/1/
+    Method - PUT
+    Request - 
+            {
+                "testimonial": "third edited  testimonial entry",
+                "author": "author1",
+            }
+        
+    Response-
+        {
+            status: 200 OK
+        }
+
+    ##################################
+    API - /app/testimonialUD/2/
+    Method- DELETE
+    Response -
+        {
+            status: 204 No Content
+        }   
+{% comment %} testimonial doc ends {% endcomment %}
+
+{% comment %} Latest testimonial API_DOC  {% endcomment %}
+9. Latest - Testimonial
+    API - /app/latestTestimonial/
+    Method - GET
+    Response - 
+    {
+    "testimonial": [
+        {
+            "id": 1,
+            "testimonial": "This is a testimonial.",
+            "date": "2019-01-08T17:32:43.966364"
+        }
+    ]
+    }
+
+{% comment %} question answer API doc starts {% endcomment %}
+10. Question / Answer
+    API - /app/questionPost/
+    Method - POST
+    Request - 
+    {
+        "user": 1,
+        "question": "What is your question?"
+    } 
+
+    Response - 
+    {
+        status : 201 Created
+    }
+##############################################################
+    GET- All Question / Answer
+    API - /app/questionList/
+    Method - GET
+    Response - 
+    [
+        {
+        "user": 18,
+        "id": 3,
+        "question": "second question?",
+        "answer": null,
+        "question_date": "2019-02-02T13:47:49.025127",
+        "answered_date": "2019-02-02T13:47:49.025167"
+        },
+        {
+            "user": 1,
+            "id": 2,
+            "question": "first question?",
+            "answer": null,
+            "question_date": "2019-02-02T13:47:29.005992",
+            "answered_date": "2019-02-02T13:47:29.006035"
+        }
+    ]
+##########################################################
+    Put-Answer
+    API - /app/questionRUD/3/
+    Method - PUT
+    Request - 
+    {
+        "id": 3,
+        "user": 1,
+        "answer": "This is the updated answer."
+    }
+    Response - 
+    {
+       status : 200 OK
+    }
+##############################################################
+    API - /questionRUD/3/
+    Method - DELETE
+    Response - 
+    {
+        status : 204 No Content
+    }    
+{% comment %} question answer API doc ends {% endcomment %}        
+
+11. AWS-Video 
+    API - /app/file_upload_video/
+    Method - GET
+    Response - 
+    {
+            "file_data": [
+            {
+                "id": 4,
+                "file": "/media/videoplayback_1_AOIsVxS.mp4",
+                "title": null,
+                "description": null,
+                "key": "video/videoplayback (1).mp4",
+                "timestamp": "2019-01-21T15:45:51.840458",
+                "thumbnail": null
+            },
+            {
+                "id": 3,
+                "file": "/media/videoplayback_1_B0zAdJk.mp4",
+                "title": null,
+                "description": null,
+                "key": "video/videoplayback (1).mp4",
+                "timestamp": "2019-01-21T15:45:33.499363",
+                "thumbnail": null
+            }
+        ]
+    }
+ #######################################################
+   API - /app/file_upload_video/
+   Method - POST
+   Request - 
+   {
+       "file":"filename.extension"            (choose file to upload)
+       "title":"sample title"
+       "description":"little description"
+       "thumbnail":"filename.extension"        (choose file to upload)
+
+    }
+    Response - 
+    {
+        "message": "File uploaded"
+    }
+    #######################################################
+    API - /app/videoDelete/1/
+    Method - DELETE
+    Response - 
+    {
+        status : 204 No Content
+    }
+
+12. AWS-Audio
+    API - /app/file_upload_audio/
+    Method - GET 
+    Response - 
+    {
+          "file_data": [
+            {
+                "id": 2,
+                "file": "/media/SampleAudio_0.7mb.mp3",
+                "title": null,
+                "description": null,
+                "key": "audio/SampleAudio_0.7mb.mp3",
+                "timestamp": "2019-01-20T01:23:14.140878"
+            }
+        ]
+    }    
+    ######################################################
+    API - /app/file_upload_audio/
+    Method - POST
+    Request - 
+    {
+        "file":"filename.extension"                    (choose file to upload)
+        "title":"audio sample title"
+        "description":"description about audio"
+    }
+    Response - 
+    {
+        "message": "File uploaded"
+    }
+    #######################################################
+    {% comment %} (DELETE AUDIO DOC) {% endcomment %}
+    API - /app/audioDelete/6/
+    Method - DELETE
+    Response - 
+    {
+        status : 204 No Content
+    }
+
+
+13. AWS-Images
+    API - /app/file_upload_image/
+    Method - GET 
+    Response - 
+    {
+            "file_data": [
+            {
+                "id": 1,
+                "file": "/media/Screenshot_from_2018-12-07_16-33-17.png",
+                "title": null,
+                "description": null,
+                "key": "image/Screenshot from 2018-12-07 16-33-17.png",
+                "timestamp": "2019-01-20T01:21:57.720273"
+            }
+        ]  
+    }    
+    ######################################################
+    API - /app/file_upload_image/
+    Method - POST
+    Request - 
+    {
+        "file":"filename.extension"                    (choose file to upload)
+        "title":"image sample title"
+        "description":"description about image"
+    }
+    Response - 
+    {
+        "message": "File uploaded"
+    }
+    #######################################################
+    {% comment %} (DELETE IMAGE DOC) {% endcomment %}
+    API - /app/imageDelete/5/
+    Method - DELETE
+    Response - 
+    {
+        status : 204 No Content
+    }
+
+14. AWS-OneMinuteVideo
+    API - /app/file_upload_OneminuteVideo/
+    Method - GET
+    Response - 
+    [
+        {
+            "id": 3,
+            "file": "/media/videoplayback_1_hiRt3lr.mp4",
+            "key": "one/",
+            "title": null,
+            "description": null,
+            "thumbnails": null,
+            "user": 1
+        },
+        {
+            "id": 2,
+            "file": "/media/videoplayback_1_1Qmeu5Y.mp4",
+            "key": "one/",
+            "title": null,
+            "description": null,
+            "thumbnails": null,
+            "user": 1
+        },
+        {
+            "id": 1,
+            "file": "/media/videoplayback_1_5cud8z6.mp4",
+            "key": "one/",
+            "title": null,
+            "description": null,
+            "thumbnails": null,
+            "user": 1
+        }
+    ]
+    ########################################
+    API - /app/file_upload_OneminuteVideo/
+    Method - POST
+    Request - 
+    {
+        "user":"1"
+        "file":"filename.extension"  (choose file to upload)
+        "title":"sample video"
+        "description":"sample description"
+        "thumbnails":"filename.extension"  (choose file to upload)
+    }
+    Response - 
+    {
+         "message": "file uploaded"
+    }
+    #######################################################
+    {% comment %} (DELETE ONEMINUTE DOC) {% endcomment %}
+    API - /app/oneminuteDelete/2/
+    Method - DELETE
+    Response - 
+    {
+        status : 204 No Content
+    }
+
