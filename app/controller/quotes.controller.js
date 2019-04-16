@@ -69,24 +69,6 @@ exports.getQuotesIndividual = (req, res) => {
     });
 };
 
-// exports.updateQuote = (res, req) => {
-//   console.log("REQUEST DATA", req.params.id);
-//   const quoteUpdateDetails = new quotesDetails({
-//     id: req.params.id,
-//     quote: req.body.quote,
-//     updatedAt: moment().format()
-//   });
-
-//   quoteUpdateDetails.updateOne(quoteUpdateDetails).then(data => {
-//     if (!data) {
-//       res.status(404).send();
-//     }
-//     res.send({
-//       message: data || "Quote Updated Successfullly"
-//     });
-//   });
-// };
-
 exports.updateQuote = (req, res) => {
   console.log("USER DATA", req);
   const quoteUpdateDetails = new quotesDetails({
@@ -105,3 +87,14 @@ exports.updateQuote = (req, res) => {
       });
     });
 };
+
+exports.getLatestQuote = (req, res) => {
+  quotesDetails.findOne().sort({ "createdAt": -1 }).then(lquote => {
+    if (!lquote) {
+      return res.status(404).send()
+    }
+    res.send(lquote);
+  }).catch(e => {
+    res.status(404).send(e)
+  })
+}
