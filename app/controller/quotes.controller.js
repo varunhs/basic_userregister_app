@@ -70,7 +70,6 @@ exports.getQuotesIndividual = (req, res) => {
 };
 
 exports.updateQuote = (req, res) => {
-  console.log("USER DATA", req);
   const quoteUpdateDetails = new quotesDetails({
     _id: req.params.id,
     quote: req.body.quote,
@@ -79,7 +78,7 @@ exports.updateQuote = (req, res) => {
   quoteUpdateDetails
     .updateOne(quoteUpdateDetails)
     .then(data => {
-      res.send({ message: "Quote Updated Successfully" });
+      res.send({ message: data || "Quote Updated Successfully" });
     })
     .catch(err => {
       res.status(500).send({
