@@ -2,104 +2,62 @@ const testimonialDetails = require('../models/testimonial.model');
 const { ObjectID } = require('mongodb');
 const moment = require('moment');
 
-exports.addTestimonial = (req, res) => {
+const addTestimonial = async (reqData) => {
     const addTestimonial = new testimonialDetails({
-        testimonial: req.body.testimonial,
-        author: req.body.author,
+        testimonial: reqData.testimonial,
+        author: reqData.author,
         createdAt: moment().format()
     });
-    addTestimonial.save()
-        .then(data => {
-            res.send({
-                message: data || "Testimonial added successfully"
-            }).catch(err => {
-                res.status(400).send({
-                    message: err.message || "Some error occured while adding Testimonial"
-                });
-            });
-        })
-        .catch(err => {
-            res.status(404).send(err);
-        });
+    const data = await addTestimonial.save(addTestimonial);
+    return data;
 };
 
-exports.deleteTestimonials = (req, res) => {
-    var id = req.params.id;
-    if (!ObjectID.isValid(id)) {
-        return res.status(404).send();
-    }
-    testimonialDetails.findByIdAndRemove(id)
-        .then(data => {
-            if (!data) {
-                return res.status(404).send();
-            }
-            res.send({
-                message: data || "Testimonial Deleted Successfully"
-            });
-        })
-        .catch(err => {
-            res.status(400).send(err);
-        });
-};
-
-exports.getTestimonial = (req, res) => {
-    testimonialDetails
-        .find()
-        .then(data => {
-            if (!data) {
-                return res.status(404).send();
-            }
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(404).send(err);
-        })
+const getTestimonial = async () => {
+    const data = testimonialDetails.find()
+    return data;
 }
 
-exports.getTestimonialByID = (req, res) => {
-    var id = req.params.id;
-    testimonialDetails
-        .findById(id)
-        .then(data => {
-            if (!data) {
-                return res.status(404).send()
-            }
-            res.send(data)
-        })
-        .catch(err => {
-            res.status(404).send(err);
-        })
+const getTestimonialByID = async (tId) => {
+
+    const data = testimonialDetails
+        .findById(tId)
+    return data;
 }
 
-exports.getLatestTestimonial = (req, res) => {
-    testimonialDetails.findOne()
+const getLatestTestimonial = async (req, res) => {
+    const data = await testimonialDetails.findOne()
         .sort({ "createdAt": -1 })
-        .then(data => {
-            if (!data) {
-                return res.status(404).send()
-            }
-            res.send(data);
-        }).catch(err => {
-            res.status(404).send(err)
-        })
+    return data
 }
 
-exports.updateTestimonial = (req, res) => {
+const updateTestimonial = async (reqData, reqId) => {
     const testimonialUpdateDetails = new testimonialDetails({
-        _id: req.params.id,
-        testimonial: req.body.testimonial,
-        author: req.body.author,
+        _id: reqId,
+        testimonial: reqData.testimonial,
+        author: reqData.author,
         updatedAt: moment().format()
     })
 
-    testimonialUpdateDetails
+    const data = await testimonialUpdateDetails
         .updateOne(testimonialUpdateDetails)
-        .then(data => {
-            res.send({ message: data || "Testimonial Updated Successfully" });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occured while creating the Register"
-            });
-        });
-} 
+    return data;
+}
+
+const deleteTestimonials = async (reqId) => {
+    if (!ObjectID.isValid(reqId)) {
+        return res.status(404).send();
+    }
+    const data = await testimonialDetails.findByIdAndRemove(reqId)
+    return data;
+};
+
+
+
+module.exports = {
+    addTestimonial,
+    deleteTestimonials,
+    getTestimonial,
+    getTestimonialByID,
+    getLatestTestimonial,
+    updateTestimonial
+}

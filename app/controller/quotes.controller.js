@@ -1,99 +1,57 @@
 const quotesDetails = require("../models/quotes.model");
-const { ObjectID } = require("mongodb");
 const moment = require("moment");
 
-exports.addQuote = (req, res) => {
+const addQuote = async (reqData) => {
   const quoteAdd = new quotesDetails({
-    quote: req.body.quote,
+    quote: reqData.quote,
     createdAt: moment().format()
   });
-  quoteAdd.save().then(data => {
-    res
-      .send({
-        message: data.message || "Quote Added Successfully"
-      })
-      .catch(err => {
-        res.status(400).send({
-          message: err.message || "Some error occured while inserting quote"
-        });
-      });
-  });
+  const data = await quoteAdd.save(quoteAdd)
+  return data;
 };
 
-exports.deleteQuote = (req, res) => {
-  var id = req.params.id;
-  if (!ObjectID.isValid(id)) {
-    return res.status(404).send();
-  }
-  quotesDetails
-    .findByIdAndRemove(id)
-    .then(data => {
-      if (!data) {
-        return res.status(404).send();
-      }
-      res.send({
-        message: data || "Quote Deleted Successfully"
-      });
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
+const getQuotes = async () => {
+  const data = await quotesDetails.find();
+  return data;
 };
 
-exports.getQuotes = (req, res) => {
-  quotesDetails
-    .find()
-    .then(quoteList => {
-      if (!quoteList) {
-        return res.status(404).send();
-      }
-      res.send(quoteList);
-    })
-    .catch(err => {
-      res.status(400).send(e);
-    });
-};
-
-exports.getQuotesIndividual = (req, res) => {
-  var id = req.params.id;
-  quotesDetails
+const getQuotesIndividual = async (id) => {
+  const data = await quotesDetails
     .findById(id)
-    .then(data => {
-      if (!data) {
-        return res.status().send();
-      }
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(404).send(err);
-    });
+  return data;
 };
 
-exports.updateQuote = (req, res) => {
+const updateQuote = async (reqData, reqId) => {
   const quoteUpdateDetails = new quotesDetails({
-    _id: req.params.id,
-    quote: req.body.quote,
+    _id: reqId,
+    quote: reqData.quote,
     updatedAt: moment().format()
   });
-  quoteUpdateDetails
+  const data = quoteUpdateDetails
     .updateOne(quoteUpdateDetails)
-    .then(data => {
-      res.send({ message: data || "Quote Updated Successfully" });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occured while creating the Register"
-      });
-    });
+  return data
 };
 
-exports.getLatestQuote = (req, res) => {
-  quotesDetails.findOne().sort({ "createdAt": -1 }).then(lquote => {
-    if (!lquote) {
-      return res.status(404).send()
-    }
-    res.send(lquote);
-  }).catch(e => {
-    res.status(404).send(e)
-  })
+const getLatestQuote = async () => {
+  const data = await quotesDetails.findOne()
+    .sort({ "createdAt": -1 })
+  return data;
+}
+
+const deleteQuote = async (id) => {
+  // if (!ObjectID.isValid(id)) {
+  //   throw new HttpError('Bad Request', 'Missing inputId', 400);
+  // }
+  const data = await quotesDetails
+    .findByIdAndRemove(id)
+  return data;
+};
+
+module.exports = {
+  addQuote,
+  deleteQuote,
+  getQuotes,
+  getQuotesIndividual,
+  updateQuote,
+  getLatestQuote
 }

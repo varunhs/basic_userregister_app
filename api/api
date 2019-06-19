@@ -158,4 +158,78 @@
             {
                 Quote Updated Successfully
             }
+
+7.Testimonial API'S
+    7.1: Add Testimonial
+        API - /api/testimonials/addTestimonial
+        Method - POST
+        Request Header - 
+            {
+                "testimonial":"This 19th june added latest testimonial",
+	            "author":"Varun H.S"
+            }
+
+        Response - 
+            {
+                "message": "Testimonial Added Successfully"
+            }
+    7.2: Get Testimonial
+        API - /api/testimonials/getTestimonial
+        Method - GET
+        Response - 
+            [
+                {
+                    "_id": "5cd90c67985c1426293ac460",
+                    "testimonial": "This is third testimonial",
+                    "author": "Ramamurthy",
+                    "createdAt": "2019-05-13T06:19:19.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5cd90cd29e6ae1268cf12753",
+                    "testimonial": "This is fourth testimonial",
+                    "author": "Ramamurthy",
+                    "createdAt": "2019-05-13T06:21:06.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5cd90d7ba23ecc2708c92834",
+                    "testimonial": "This is fifth testimonial",
+                    "author": "Ramamurthy",
+                    "createdAt": "2019-05-13T06:23:55.000Z",
+                    "__v": 0
+                },
+            ]
+    7.3: Get Testimonial Individualy(By ID)
+        API - /api/testimonials/getTestimonial/:id
+        Method - GET
+        Response - 
+            {
+                "_id": "5cd90b2015662e24bca38f23",
+                "testimonial": "This is the Second testimonial Update Testing",
+                "author": "Varun Suresh",
+                "createdAt": "2019-05-13T06:13:52.000Z",
+                "__v": 0,
+                "updatedAt": "2019-06-19T05:36:27.000Z"
+            }  
+    7.4: Delete Testimonial
+        API - /api/testimonials/deleteTestimonial/id
+        Method - DELETE
+        Response - 
+            {
+                "message": "Testimonial Deleted Successfully"
+            }
+    7.5: Update Testimonial
+        API - /api/testimonials/updateTestimonial/id
+        Method - PUT
+        Request - 
+            {
+                "testimonial": "This is the Second testimonial Update Testing",
+                "author": "Varun Suresh"
+            }
+        Response - 
+            {
+                Testimonial Updated Successfully
+            }
+        
     
